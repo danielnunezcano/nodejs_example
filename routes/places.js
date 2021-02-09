@@ -6,6 +6,9 @@ const {
   show,
   update,
   destroy,
+  find,
+  multerMiddleware,
+  saveImage
 } = require("../controllers/PlacesControllers");
 
 let router = express.Router();
@@ -13,14 +16,14 @@ let router = express.Router();
 router
   .route("/")
   // Crear un registro
-  .post(create)
+  .post(multerMiddleware(),create,saveImage)
   // Obtener todos los registros
   .get(index);
 
 router
   .route("/:id")
-  .get(show)
-  .put(update)
-  .delete(destroy);
+  .get(find,show)
+  .put(find,update)
+  .delete(find,destroy);
 
 module.exports = router;
