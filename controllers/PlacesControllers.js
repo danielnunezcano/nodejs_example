@@ -1,4 +1,4 @@
-const Place = require("../models/Places");
+const Place = require("../models/Place");
 const upload = require("../config/upload");
 const uploader = require("../models/Uploader");
 
@@ -26,20 +26,18 @@ function index(req, res) {
 }
 
 function create(req, res, next) {
+  console.log(req.body);
   Place.create({
     title: req.body.title,
     description: req.body.description,
     acceptsCreditCard: req.body.acceptsCreditCard,
     openHour: req.body.openHour,
     closeHour: req.body.closeHour,
-  })
-    .then((doc) => {
-      res.json(doc);
+  }).then(doc => {
+      req.place = doc;
       next();
     })
     .catch((err) => {
-      console.log(err);
-      res.json(err);
       next(err);
     });
 }
@@ -100,7 +98,7 @@ function saveImage(req, res) {
   if (req.body) {
     if (req.files && req.files.avatar) {
       const path = req.files.avatar[0].path;
-      uploader(path)
+      req.place.updateAvatar(path)
         .then((result) => {
           console.log(result);
           res.json(req.place);
@@ -112,8 +110,8 @@ function saveImage(req, res) {
     }
   } else {
     res.status(422).json({
-      error:req.error || 'Could not save place'
-    })
+      error: req.error || "Could not save place",
+    });
   }
 }
 

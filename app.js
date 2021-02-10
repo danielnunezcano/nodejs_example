@@ -4,13 +4,10 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-const Places = require("./models/Places");
-
 const places = require("./routes/places");
 
 const db = require("./config/dababase");
 
-const Place = require("./models/Places");
 db.connect();
 
 var app = express();

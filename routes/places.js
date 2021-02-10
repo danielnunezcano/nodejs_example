@@ -1,5 +1,4 @@
 const express = require("express");
-const Places = require("../models/Places");
 const {
   index,
   create,
