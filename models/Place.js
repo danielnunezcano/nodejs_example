@@ -18,12 +18,12 @@ let placeSchema = new mongoose.Schema({
   closeHour: Number,
 });
 
-placeSchema.methods.updateAvatar = function (path) {
-  return uploader(path).then((secure_url) => this.saveAvatarUrl(secure_url));
+placeSchema.methods.updateImage = function (path,imageType) {
+  return uploader(path).then((secure_url) => this.saveImageUrl(secure_url,imageType));
 };
 
-placeSchema.methods.saveAvatarUrl = function (secureUrl) {
-  this.avatarImage = secureUrl;
+placeSchema.methods.saveImageUrl = function (secureUrl,imageType) {
+  this[imageType+"Image"] = secureUrl;
   return this.save();
 };
 

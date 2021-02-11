@@ -33,7 +33,8 @@ function create(req, res, next) {
     acceptsCreditCard: req.body.acceptsCreditCard,
     openHour: req.body.openHour,
     closeHour: req.body.closeHour,
-  }).then(doc => {
+  })
+    .then((doc) => {
       req.place = doc;
       next();
     })
@@ -95,19 +96,24 @@ function multerMiddleware() {
 }
 
 function saveImage(req, res) {
-  if (req.body) {
-    if (req.files && req.files.avatar) {
-      const path = req.files.avatar[0].path;
-      req.place.updateAvatar(path)
-        .then((result) => {
-          console.log(result);
-          res.json(req.place);
-        })
-        .catch((err) => {
-          console.log(err);
-          res.json(err);
-        });
-    }
+  if (req.place) {
+    const files = ["avatar", "cover"];
+    const promises = [];
+    files.forEach((imageType) => {
+      if (req.files && req.files[imageType]) {
+        const path = req.files[imageType][0].path;
+        promises.push(req.place.updateImage(path, imageType));
+      }
+    });
+    Promise.all(promises)
+      .then((results) => {
+        console.log(results);
+        res.json(req.place);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
   } else {
     res.status(422).json({
       error: req.error || "Could not save place",
