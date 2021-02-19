@@ -12,6 +12,7 @@ let placeSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  address: String,
   description: String,
   acceptsCreditCard: {
     type: Boolean,
