@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 const places = require("./routes/places");
+const transactions = require("./routes/transactions");
 
 const db = require("./config/dababase");
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/places",places);
+app.use("/transactions",transactions);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
