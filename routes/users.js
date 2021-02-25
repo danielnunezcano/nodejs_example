@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const usersController = require("../controllers/UsersController");
+
+const sessionsControllers = require("../controllers/SessionsController");
+
+router
+  .route("/")
+  .post(
+    usersController.create,
+    sessionsControllers.generateToken,
+    sessionsControllers.sendToken
+  );
 
 module.exports = router;
