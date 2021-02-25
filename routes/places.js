@@ -8,7 +8,7 @@ const {
   find,
   multerMiddleware,
   saveImage
-} = require("../controllers/PlacesControllers");
+} = require("../controllers/PlacesController");
 
 let router = express.Router();
 

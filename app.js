@@ -6,10 +6,12 @@ var logger = require("morgan");
 
 const places = require("./routes/places");
 const transactions = require("./routes/transactions");
+const users = require("./routes/users");
 
 const db = require("./config/dababase");
 
 db.connect();
+
 
 var app = express();
 
@@ -21,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/places",places);
 app.use("/transactions",transactions);
+app.use("/users",users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
