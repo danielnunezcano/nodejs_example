@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
-let transactionsSchema = new mongoose.Schema({
+let transactionSchema = new mongoose.Schema({
   fecha: {
     type: String,
     required: true,
   },
   prevision: Number,
   importe: {
-    type: String,
+    type: Number,
     required: true,
   },
   descripcion: {
@@ -29,8 +29,8 @@ let transactionsSchema = new mongoose.Schema({
   }
 });
 
-transactionsSchema.plugin(mongoosePaginate);
+transactionSchema.plugin(mongoosePaginate);
 
-const Transactions = mongoose.model("Transactions", transactionsSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
-module.exports = Transactions;
+module.exports = Transaction;

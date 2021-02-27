@@ -1,21 +1,33 @@
-const Transactions = require("../models/Transactions");
+const Transaction = require("../models/Transaction");
 const helpers = require("./helpers");
+
+const validParams = [
+  "fecha",
+  "prevision",
+  "importe",
+  "descripcion",
+  "partida",
+  "cuenta",
+  "categoria"
+];
 
 function create(req, res) {
   const params = helpers.buildParams(validParams, req.body);
-  Transactions.create(params)
+  console.log(req.body)
+  console.log(params)
+  Transaction.create(params)
     .then((doc) => {
       res.json(doc)
-      next();
     })
     .catch((err) => {
-      next(err);
+      console.log(err);
+      res.json(err);
     });
 }
 
 function index(req, res) {
   // Todos los lugares
-  Transactions.paginate({}, { page: req.query.page || 1, limit: 8, sort: { _id: -1 } })
+  Transaction.paginate({}, { page: req.query.page || 1, limit: 8, sort: { _id: -1 } })
     .then((docs) => {
       res.json(docs);
     })
