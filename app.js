@@ -3,18 +3,21 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var jwtMiddleware = require("express-jwt");
 
-const Transaction = require("./models/Transaction");
+const Transaction = require("./app/transactions/models/Transaction");
 
-const places = require("./routes/places");
-const transactions = require("./routes/transactions");
-const users = require("./routes/users");
+const places = require("./app/places/routes/places");
+const transactions = require("./app/transactions/routes/transactions");
+const users = require("./app/users/routes/users");
+const sessions = require("./app/sessions/routes/sessions");
+const favorites = require("./app/favorites/routes/favorites");
 
-const db = require("./config/dababase");
+const db = require("./app/config/dababase");
+const secrets = require("./app/config/secrets");
+const FavoritePlace = require("./app/favorites/models/FavoritePlace");
 
 db.connect();
-
-
 var app = express();
 
 app.use(logger("dev"));
@@ -23,10 +26,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/places",places);
-app.use("/transactions",transactions);
-app.use("/users",users);
+app
+  .use(jwtMiddleware({ secret: secrets.jwtSecret })
+  .unless({ path: ["/sessions"]}));
 
+app.use("/places", places);
+app.use("/transactions", transactions);
+app.use("/users", users);
+app.use("/sessions", sessions);
+app.use("/favorites", favorites);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

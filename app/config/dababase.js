@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dbName = "places_facilito_api";
+const dbName = "places";
 
 module.exports = {
   connect: () => mongoose.connect("mongodb://localhost/" + dbName),

@@ -1,5 +1,5 @@
 const Transaction = require("../models/Transaction");
-const helpers = require("./helpers");
+const helpers = require("../../utils/helpers");
 
 const validParams = [
   "fecha",

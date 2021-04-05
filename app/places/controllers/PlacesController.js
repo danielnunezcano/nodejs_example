@@ -1,7 +1,7 @@
 const Place = require("../models/Place");
-const upload = require("../config/upload");
-const uploader = require("../models/Uploader");
-const helpers = require("./helpers");
+const upload = require("../../config/upload");
+const uploader = require("../../utils/Uploader");
+const helpers = require("../../utils/helpers");
 
 const validParams = [
   "title",
@@ -15,6 +15,7 @@ function find(req, res, next) {
   Place.findOne({ slug: req.params.id })
     .then((place) => {
       req.place = place;
+      req.mainObj = place;
       next();
     })
     .catch((err) => {
@@ -36,6 +37,7 @@ function index(req, res) {
 
 function create(req, res, next) {
   const params = helpers.buildParams(validParams, req.body);
+  params['_user']= req.user.id;
   Place.create(params)
     .then((doc) => {
       req.place = doc;

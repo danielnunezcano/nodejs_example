@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
-const uploader = require("./Uploader");
-const slugify = require("../plugins/slugify");
+const uploader = require("../../app/utils/Uploader");
+const slugify = require("../../app/plugins/slugify");
 
 let placeSchema = new mongoose.Schema({
   title: {
@@ -22,6 +22,11 @@ let placeSchema = new mongoose.Schema({
   avatarImage: String,
   openHour: Number,
   closeHour: Number,
+  _user:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  }
 });
 
 placeSchema.methods.updateImage = function (path, imageType) {
