@@ -12,6 +12,8 @@ const transactions = require("./app/transactions/routes/transactions");
 const users = require("./app/users/routes/users");
 const sessions = require("./app/sessions/routes/sessions");
 const favorites = require("./app/favorites/routes/favorites");
+const visits = require("./app/visit/routes/visits");
+const visitPlaces = require("./app/visit/routes/visitPlaces");
 
 const db = require("./app/config/dababase");
 const secrets = require("./app/config/secrets");
@@ -31,10 +33,12 @@ app
   .unless({ path: ["/sessions"]}));
 
 app.use("/places", places);
+app.use("/places", visitPlaces);
 app.use("/transactions", transactions);
 app.use("/users", users);
 app.use("/sessions", sessions);
 app.use("/favorites", favorites);
+app.use("/visits", visits);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

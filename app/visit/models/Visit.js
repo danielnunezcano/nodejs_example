@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
 
+const REACTIONS = [
+  "like",
+  "love",
+  "disappointment",
+  "yummy",
+  "anger",
+  "disgust",
+];
+
 let visitSchema = new mongoose.Schema({
   _user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -12,10 +21,21 @@ let visitSchema = new mongoose.Schema({
     ref: "Place",
     required: true,
   },
+  reaction: {
+    type: String,
+    enum: REACTIONS,
+  },
   observation: String,
 });
 
-placeSchema.plugin(mongoosePaginate);
+visitSchema.statics.forUser = function (userId, page) {
+  return Visit.paginate(
+    { _user: userId },
+    { page: page, limit: 5, sort: { _id: -1 } }
+  );
+};
+
+visitSchema.plugin(mongoosePaginate);
 
 const Visit = mongoose.model("Visit", visitSchema);
 
