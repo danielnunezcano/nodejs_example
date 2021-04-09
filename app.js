@@ -12,6 +12,7 @@ const sessions = require("./app/sessions/SessionsRoute");
 const favorites = require("./app/favorites/FavoritesRoute");
 const visitPlaces = require("./app/visit/VisitPlacesRoute");
 const FavoritePlace = require("./app/favorites/FavoritesRoute");
+const applications = require("./app/application/ApplicationsRoute");
 
 const db = require("./app/config/dababase");
 const secrets = require("./app/config/secrets");
@@ -36,6 +37,7 @@ app.use("/users", users);
 app.use("/sessions", sessions);
 app.use("/favorites", favorites);
 app.use("/visits", visits);
+app.use("/applications", applications);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
