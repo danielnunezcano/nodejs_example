@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
-const uploader = require("../../utils/Uploader");
-const slugify = require("../../plugins/slugify");
-const Visit = require("../../visit/models/Visit");
+const uploader = require("../utils/Uploader");
+const slugify = require("../plugins/slugify");
+const Visit = require("../visit/VisitModel");
 
 let placeSchema = new mongoose.Schema({
   title: {

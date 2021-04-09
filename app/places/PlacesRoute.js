@@ -8,11 +8,11 @@ const {
   find,
   multerMiddleware,
   saveImage,
-} = require("../controllers/PlacesController");
+} = require("./PlacesController");
 
 let router = express.Router();
 
-const authenticateOwner = require("../../middlewares/authenticateOwner");
+const authenticateOwner = require("../middlewares/authenticateOwner");
 
 router
   .route("/")

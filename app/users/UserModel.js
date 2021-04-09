@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const mongooseBcrypt = require("mongoose-bcrypt");
 
-const Place = require("../../places/models/Place");
-const FavoritePlace = require("../../favorites/models/FavoritePlace");
+const Place = require("../places/PlaceModel");
+const FavoritePlace = require("../favorites/FavoritePlaceModel");
 
 let userShema = new mongoose.Schema({
   email: {

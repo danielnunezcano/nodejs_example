@@ -1,9 +1,9 @@
-const buildParams = require("../../utils/helpers").buildParams;
+const buildParams = require("../utils/helpers").buildParams;
 
 const validParams = ["_place", "reaction", "observation"];
 
-const Visit = require("../models/Visit");
-const User = require("../../users/models/User");
+const Visit = require("./VisitModel");
+const User = require("../users/UserModel");
 
 function find(req, res, next) {
   Visit.findById(req.params.visit_id)

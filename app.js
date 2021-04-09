@@ -5,19 +5,17 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var jwtMiddleware = require("express-jwt");
 
-const Transaction = require("./app/transactions/models/Transaction");
-
-const places = require("./app/places/routes/places");
-const transactions = require("./app/transactions/routes/transactions");
-const users = require("./app/users/routes/users");
-const sessions = require("./app/sessions/routes/sessions");
-const favorites = require("./app/favorites/routes/favorites");
-const visits = require("./app/visit/routes/visits");
-const visitPlaces = require("./app/visit/routes/visitPlaces");
+const places = require("./app/places/PlacesRoute");
+const users = require("./app/users/UsersRoute");
+const visits = require("./app/visit/VisitsRoute");
+const sessions = require("./app/sessions/SessionsRoute");
+const favorites = require("./app/favorites/FavoritesRoute");
+const visitPlaces = require("./app/visit/VisitPlacesRoute");
+const FavoritePlace = require("./app/favorites/FavoritesRoute");
 
 const db = require("./app/config/dababase");
 const secrets = require("./app/config/secrets");
-const FavoritePlace = require("./app/favorites/models/FavoritePlace");
+
 
 db.connect();
 var app = express();
@@ -34,7 +32,6 @@ app
 
 app.use("/places", places);
 app.use("/places", visitPlaces);
-app.use("/transactions", transactions);
 app.use("/users", users);
 app.use("/sessions", sessions);
 app.use("/favorites", favorites);

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const secrets = require("../../config/secrets");
+const secrets = require("../config/secrets");
 
-const User = require("../../users/models/User");
+const User = require("../users/UserModel");
 
 function authenticate(req, res, next) {
   User.findOne({ email: req.body.email })

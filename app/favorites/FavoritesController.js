@@ -1,9 +1,9 @@
-const buildParams = require("../../utils/helpers").buildParams;
+const buildParams = require("../utils/helpers").buildParams;
 
 const validParams = ["_place"];
 
-const FavoritePlace = require("../models/FavoritePlace");
-const User = require("../../users/models/User");
+const FavoritePlace = require("./FavoritePlaceModel");
+const User = require("../users/UserModel");
 
 function find(req, res, next) {
   FavoritePlace.findById(req.params.id)

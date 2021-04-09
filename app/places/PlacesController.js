@@ -1,7 +1,7 @@
-const Place = require("../models/Place");
-const upload = require("../../config/upload");
-const uploader = require("../../utils/Uploader");
-const helpers = require("../../utils/helpers");
+const Place = require("./PlaceModel");
+const upload = require("../config/upload");
+const uploader = require("../utils/Uploader");
+const helpers = require("../utils/helpers");
 
 const validParams = [
   "title",

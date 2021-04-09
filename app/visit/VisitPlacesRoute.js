@@ -1,8 +1,8 @@
 const express = require("express");
 let router = express.Router();
-const visitsController = require("../controllers/VisitsController");
-const authenticateOwner = require("../../middlewares/authenticateOwner");
-const placesController = require("../../places/controllers/PlacesController");
+const visitsController = require("./VisitsController");
+const authenticateOwner = require("../middlewares/authenticateOwner");
+const placesController = require("../places/PlacesController");
 
 router
   .route("/:id/visits")

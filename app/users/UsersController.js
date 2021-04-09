@@ -1,7 +1,7 @@
-const User = require("../models/User");
-const buildParams = require("../../utils/helpers").buildParams;
+const User = require("./UserModel");
+const buildParams = require("../utils/helpers").buildParams;
 
-const Place = require("../../places/models/Place")
+const Place = require("../places/PlaceModel")
 
 const validParams = ["email", "name", "password"];
 
